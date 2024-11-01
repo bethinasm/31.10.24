@@ -1,13 +1,17 @@
 updateView()
 function updateView(){
-    app.innerHTML = /*HTML*/`
+    model.app.html.innerHTML = /*HTML*/ `
         <div>
             <div>
                 <p>Add new user:</p>
-                <input placeholder="Username" onchange="model.newUser.username = this.value">
-                <input placeholder="Password" onchange="model.newUser.password = this.value">
+                <div>
+                    <input placeholder="Username" onchange="model.input.newUser.username = this.value"><br>
+                    <input placeholder="Password" onchange="model.input.newUser.password = this.value"><br><br>
+                    <input placeholder="Short bio about yourself" onchange="model.input.newUser.bio = this.value"/><br>
+                    <input placeholder="Date Of Birth" onchange="model.input.newUser.dateOfBirth = this.value"/><br><br>
+                    <button onclick="addNewUser()"> Submit </button>
+                    </div>
                 
-                <button onclick="addNewUser()"> Submit </button>
                 <br> <br>
                 <hr>
             </div>
@@ -24,34 +28,61 @@ function updateView(){
             </div>
             <br> <br>
             <hr>
-            <div> ${txtBox}</div>
+            <div> ${model.app.txtBox} </div>
         </div>
     `;
 }
 
-function showAllUsers(){
+function showAllUsers() {
     let html = '';
     
-    for (let i = 0; i < model.users.length; i++){
-        let username = model.users[i].username;
+    for (let i = 0; i < model.data.users.length; i++) {
+        let userID = model.data.users[i].id;
+        let username = model.data.users[i].username;
+
         html += /*HTML*/ `
-         ${username} 
-        <button> Add friend </button>
-        <button onclick="showProfile(userID)">  View profile </button> <br>
+            ${username} 
+            <button> Add friend </button>
+            <button onclick="showProfile(${userID})">  View profile </button> <br>
         `;
     }
     return html;
 }
 
-function showProfile(userID){
-    let user = model.users.find(u=>u.id === userID);
-    
-    txtBox = /*HTML*/ `
+function showProfile(userID) {
+    //find er innebygd JS funksjon. Den går igjennm hver verdi i et array og returnerer den første verdien som oppfyller betingelsen.
+    let user = model.data.users.find(user => user.id === userID);
+    let friendsList = '';
+
+    console.log(`User: ${user.username}, Users Friends: ${user.friends}`);
+
+    for (let i = 0; i < user.friends.length; i++) {
+        let friendID = user.friends[i];
+        let friend = model.data.users.find(user => user.id === friendID);
+        
+        console.log(friend);
+        
+        if (friend) {
+            friendsList += /*HTML*/ `
+                <li> ${friend.username} </li>
+            `;
+        }
+    }
+
+    model.app.txtBox = /*HTML*/ `
         <div> 
             <p>Welcome to ${user.username}'s profile!</p>
+            <p> ${user.bio} </p>
+            <p> ${user.dateOfBirth} </p>
+            <hr>
+            <div>  
+                <p> ${user.username}'s friends: </p>
+                <ul> 
+                    ${friendsList || `No friends added yet`}
+                </ul> 
+            </div>
         </div>
     `;
-    
 
-    return html;
+    updateView();
 }

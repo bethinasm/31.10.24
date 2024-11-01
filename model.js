@@ -1,34 +1,40 @@
 
-const app = document.getElementById('app');
-let txtBox ='';
-
 const  model = {
+    app: {
+        html: document.getElementById('app'),
+        currentUser: null,
+        txtBox: '',
+    },
+   
+    input: {
+        newUser: {
+                id: '',
+                username: '',
+                password: '',
+                friends: '',
+                bio:'',
+                dateOfBirth:'',
+            },
+    },
 
-    currentUser: null,
-
-    newUser: {
-            userID: '',
-            username: '',
-            password: '',
-        },
-    
-    users: [
-        {
-            userID: 1,
-            username: 'Bethina',
-            password: '123',
-            friends:[2],
-            bio: 'Heihei! Jeg er sliten',
-            dateOfBirth: '15.08.1996'
-        },
-        {
-            userID: 2,
-            username: 'Oscar',
-            password: '12345',
-            friends:[1],
-            bio: 'Fluffy matvrak',
-            dateOfBirth: '11.03.2024',
-        },
-    ]
-
-}
+    data: {
+        users: [
+            {
+                id: 1,
+                username: 'Bethina',
+                password: '123',
+                friends:[2],
+                bio: 'Heihei! Jeg er sliten',
+                dateOfBirth: '15.08.1996'
+            },
+            {
+                id: 2,
+                username: 'Oscar',
+                password: '12345',
+                friends:[1],
+                bio: 'Fluffy matvrak',
+                dateOfBirth: '11.03.2024',
+            },
+        ]
+    },
+};

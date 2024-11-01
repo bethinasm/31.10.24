@@ -1,12 +1,17 @@
 function addNewUser(){
-    let newUserSignUp = model.newUser;
+    let newUserSignUp = model.input.newUser;
     let newUser = {
-        userID: model.users.length + 1,
+        id: model.data.users.length + 1,
         username: newUserSignUp.username,
         password: newUserSignUp.password,
+        friends:'',
+        bio: newUserSignUp.bio,
+        dateOfBirth: newUserSignUp.dateOfBirth,
     };
+
     console.log(newUser);
-    model.users.push(newUser);
+    
+    model.data.users.push(newUser);
     
     updateView();
 }
