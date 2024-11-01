@@ -2,7 +2,7 @@
 const  model = {
     app: {
         html: document.getElementById('app'),
-        currentUser: null,
+        currentUser: 3,
         txtBox: '',
     },
    

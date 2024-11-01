@@ -15,3 +15,25 @@ function addNewUser(){
     
     updateView();
 }
+
+function addFriend(userID) {
+    currentUser = model.data.users.find(user => user.id === model.app.currentUser);
+    
+    let friendToAdd = model.data.users.find(user => user.id === userID);
+
+
+    if (currentUser && friendToAdd) { //sjekker at begge finnes (ikke er null eller undefined)
+        if (!currentUser.friends){
+            currentUser.friends = [];
+        }
+        if(!currentUser.friends.includes(friendToAdd.id)) {
+            currentUser.friends.push(friendToAdd.id);
+            
+            console.log(`${currentUser.username} added ${friendToAdd.username} as a friend`)
+            
+            showProfile(currentUser.id);
+        }else {
+            console.log(`${currentUser.username} and ${friendToAdd.username} are already friends`)
+        }
+    }
+}

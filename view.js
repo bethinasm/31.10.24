@@ -21,11 +21,8 @@ function updateView(){
                     Existing users: <br>
                     ${showAllUsers()}
                 </div>
-                <div>
-                    Your friends: <br>
-
-                </div>
             </div>
+            
             <br> <br>
             <hr>
             <div> ${model.app.txtBox} </div>
@@ -42,7 +39,7 @@ function showAllUsers() {
 
         html += /*HTML*/ `
             ${username} 
-            <button> Add friend </button>
+            <button onclick="addFriend(${userID})"> Add friend </button>
             <button onclick="showProfile(${userID})">  View profile </button> <br>
         `;
     }
